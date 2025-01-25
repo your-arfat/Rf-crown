@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>RF-Clown: Your Portable BLE/Bluetooth Jamming Tool</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+    <h1>RF-Clown: Your Portable BLE/Bluetooth Jamming Tool</h1>
+    
+    <div class="headerImg">
+      <img src="images/1.png" alt="">
+    </div>
+    
+    <!-- 🔧 Introduction -->
+    <div class="introduction sections">
+      <h1>🔧 Introduction</h1>
+      <p>In a world where wireless communication surrounds us, Bluetooth Low Energy (BLE) and Classic Bluetooth are critical components for countless devices. From smartwatches to wireless headphones, these technologies form the backbone of modern connectivity. However, understanding their vulnerabilities and limitations is essential for researchers and enthusiasts alike. Enter RF-Clown, an open-source BLE jammer designed for education and research purposes.
+      </br> </br>
+The motivation behind RF-Clown was to create a tool that could serve as an example of open-source collaboration. Many similar projects remain closed, limiting their use to a select few. With RF-Clown, all resources—from code to PCB designs—are freely available on GitHub, ensuring transparency and accessibility.
+</br> </br>
+This blog post will guide you through the RF-Clown project, detailing its features, design, and implementation. Additionally, we’ll discuss how to build it using a breadboard and explore its potential applications.</p>
+<img src="images/2.png" alt="">
+    </div>
+    
+    <!-- 🛠️ Features -->
+    <div class="features sections">
+      <h1>🛠️ Features</h1>
+      <p>RF-Clown is a compact yet powerful BLE and Classic Bluetooth jammer with the following features: <br/> <br/>
+      <ul>
+        <li>Multi-Mode Operation: <span>Supports jamming for BLE, Classic Bluetooth, or both simultaneously.</span></li>
+        <li>Compact Design: <span>Optimized PCB layout for portability and ease of assembly.</span></li>
+        <li>NeoPixel LED Indicator:<span>Displays the current operating mode for easy identification.</span></li>
+        <li>Power Management:<span>Includes a TP4056 for charging and an LF33 voltage regulator for stable operation.</span></li>
+        <li>Open Source:<span>Full access to code, schematics, and PCB designs.</span></li>
+      </ul>
+      
+      </p>
+    </div>
+    
+    <!-- 🎨 Building the Breadboard Versionv -->
+    <div class="building sections">
+      <h1>🎨 Building the Breadboard Version</h1>
+      <p>For enthusiasts who prefer experimenting with the hardware before committing to soldering or PCB fabrication, RF-Clown can be assembled on a breadboard. This approach allows you to test and modify the project as needed.</p>
+      <div class="required">
+        <h3>Required Components</h3>
+        <table border="1" style="border-collapse: collapse;">
+          <tr>
+            <th>Component</th>
+            <th>Quantity</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>ESP32</td>
+            <td>1</td>
+            <td>Main microcontroller</td>
+          </tr>
+          <tr>
+            <td>NRF24L01</td>
+            <td>2</td>
+            <td>Wireless transceivers</td>
+          </tr>
+          <tr>
+            <td>CP2102 USB to Serial</td>
+            <td>1</td>
+            <td>For programming the ESP32</td>
+          </tr>
+          <tr>
+            <td>TP4056</td>
+            <td>1</td>
+            <td>Lithium battery charger</td>
+          </tr>
+          <tr>
+            <td>LF33 Voltage Regulator</td>
+            <td>1</td>
+            <td>3.3V output regulator</td>
+          </tr>
+          <tr>
+            <td>Micro Switch</td>
+            <td>1</td>
+            <td>Mode selection</td>
+          </tr>
+          <tr>
+            <td>Resistors, Wires</td>
+            <td>-</td>
+            <td>Miscellaneous</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 🔌 Breadboard Wiring Guide -->
+    <div class="breadboard sections">
+      <h1>🔌 Breadboard Wiring Guide</h1>
+      <p>Below are the connections for the breadboard version of RF-Clown:</p>
+      <ul>
+        <li>
+          RF-Clown Breadboard Version Pin Connections
+  <table border="1" style="background:#444444;">
+  <tr>
+    <th>Component</th>
+    <th>Pin</th>
+    <th>ESP32 Pin (GPIO)</th>
+  </tr>
+  <tr>
+    <td>ESP32</td>
+    <td>Data</td>
+    <td>GPIO 4</td>
+  </tr>
+  <tr>
+    <td>Button</td>
+    <td>Signal</td>
+    <td>GPIO 33</td>
+  </tr>
+  <tr>
+    <td>NRF24L01 (VSPI)</td>
+    <td>CS</td>
+    <td>GPIO 15</td>
+  </tr>
+  <tr>
+    <td>NRF24L01 (VSPI)</td>
+    <td>CE</td>
+    <td>GPIO 5</td>
+  </tr>
+  <tr>
+    <td>NRF24L01 (HSPI)</td>
+    <td>CS</td>
+    <td>GPIO 22</td>
+  </tr>
+  <tr>
+    <td>NRF24L01 (HSPI)</td>
+    <td>CS</td>
+    <td>GPIO 21</td>
+  </tr>
+</table>
+<img src="images/3.png" alt="">
+          
+          
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Assembly Steps -->
+    <div class="assembly sections">
+      <h1>Assembly Steps</h1>
+      <p>
+        <b>1.</b> Connect the ESP32 to the breadboard. </br>
+<b>2.</b> Attach the NRF24L01 modules to the respective SPI interfaces (VSPI and HSPI).
+</br>
+<b>3.</b> Connect the NeoPixel LED to GPIO 4.</br>
+<b>4.</b> Add the mode button to GPIO 33.</br>
+<b>5.</b> Wire the TP4056 and LF33 for power management.</br>
+<b>6.</b> Double-check all connections against the table above.</br>
+<b>7.</b>  Program the ESP32 using the CP2102 module.</br>
+      </p>
+    </div>
+    
+    
+    <!-- 📜 Writing the Code -->
+    <div class="code sections">
+      <h1>📜 Writing the Code</h1>
+      <p>The heart of RF-Clown lies in its firmware. The code is structured to allow seamless switching between BLE, Classic Bluetooth, and combined modes. Here’s an overview of the key functions: <br/> <br/>
+      <h3>Mode Switching</h3>
+      <br/> <br/>
+      <p>RF-Clown uses a button connected to GPIO 33 to switch between modes. A NeoPixel LED provides visual feedback:
+</br>
+• <b>Blue:</b> BLE mode.</br>
+• <b>Green:</b> Classic Bluetooth mode.</br>
+• <b>Red:</b> Combined mode.</p>
+ <br/> <br/>
+<h3>SPI Configuration</h3>
+ <br/> <br/>
+<p>The ESP32’s VSPI and HSPI interfaces control two NRF24L01 modules simultaneously. This setup allows efficient hopping across multiple frequencies.</p>
+
+<img src="images/c1.png" alt="void configureRadio(RF24 &amp;radio, int channel, SPIClass *spi) {
+    if (radio.begin(spi)) {
+        radio.setAutoAck(false);
+        radio.stopListening();
+        radio.setPALevel(RF24_PA_MAX, true);
+        radio.startConstCarrier(RF24_PA_HIGH, channel);
+    }
+}
+"> <br/>
+
+
+
+<h3>Jamming Functions</h3>
+<br/> <br/>
+<p>Each mode employs different channel sets to disrupt communication:
+<br/>
+• <b>BLE Channels:t</b> 2, 26, 80 <br/>
+• <b>Classic Bluetooth Channels:</b> 32, 34, 46, 48, 50, 52, etc.</p>
+<img src="images/c2.png" alt="void jamBLE() {
+    int randomIndex = random(0, sizeof(ble_channels) / sizeof(ble_channels[0]));
+    radioVSPI.setChannel(ble_channels[randomIndex]);
+}
+">
+      </p>
+    </div>
+    
+    
+    
+    
+    <!-- 🚀 PCB Design -->
+    <div class="pcbDesign sections">
+      <h1>🚀 PCB Design</h1>
+      <p>A custom PCB was designed to make RF-Clown portable and robust. The PCB integrates all components, including the ESP32, NRF24L01 modules, NeoPixel LED, and power management circuitry.
+      <br/> <br/>
+      <h3>Key Features of the PCB</h3> <br/> <br/>
+      <p>• Compact layout for portability.<br/>
+• Dedicated headers for NRF24L01 modules. <br/>
+• Integrated CP2102 for programming.<br/>
+• Power management with TP4056 and LF33.</p>
+      </p>
+      <img  src="images/4.png" alt="">
+    </div>
+    
+    
+    
+    <!-- 👁‍🗨 Applications -->
+    <div class="applications sections">
+      <h1>👁‍🗨 Applications</h1>
+      <p>RF-Clown is designed for educational and research purposes. Potential applications include: <br/>
+
+• <b>Security Testing:</b> Analyze the resilience of BLE and Bluetooth devices against jamming attacks. <br/>
+• <b>Wireless Protocol Research:</b> Study the behavior of devices under high-traffic conditions. <br/>
+• <b>Demonstrations:</b> Showcase vulnerabilities in wireless communication.</p>
+<img src="images/5.png" alt="">
+    </div>
+    
+    
+    <!-- Code & PCB -->
+    <div class="pcb sections">
+      <h1>Code & PCB</h1>
+      <p>If you’re interested in building this project, the code and schematic are available on GitHub. Simply visit the GitHub repository to download the necessary files. Feel free to test the code and share your feedback or improvements. </br>
+GitHub repository: <a href="https://github.com/cifertech/RF-Clown">RF-Clown</a></p>
+    </div>
+    
+    
+    
+    
+    
+    
+    <!-- 🌟 Conclusion -->
+    <div class="conclusion sections">
+      <h1>🌟 Conclusion</h1>
+      <p>RF-Clown is an open-source BLE and Bluetooth jammer inspired by similar projects in the community. Unlike many closed-source implementations, RF-Clown emphasizes transparency and education. The project is meant for testing and learning about RF technologies and communication protocols. <br/> </br>
+For detailed instructions, download links, and more, visit the GitHub repository.</p>
+    </div>
+    
+  </main>
+</body>
+</html>
